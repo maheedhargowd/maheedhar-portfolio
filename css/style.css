@@ -1,0 +1,329 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-yellow: #FFD300; /* Bright yellow for buttons */
+    --dark-text: #333333;
+    --light-text: #555555;
+    --bg-light: #FFFFFF;
+    --bg-grey: #f9f9f9;
+    --border-light: #eeeeee;
+}
+
+/* Smooth scrolling for links */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Offset for the fixed header */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    color: var(--dark-text);
+    background-color: var(--bg-light);
+    line-height: 1.7;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--dark-text);
+}
+
+/* --- Header (Top Nav) --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: 80px;
+    background-color: var(--bg-light);
+    
+    /* Fixed position */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90%; /* 100% - 10% for padding */
+    z-index: 1000;
+    
+    /* Subtle shadow */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+header .logo a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: var(--dark-text);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav li {
+    margin-left: 30px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: var(--light-text);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+header nav a:hover {
+    color: var(--primary-yellow);
+}
+
+/* --- Social Links (Left Bar) --- */
+.social-links {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 500;
+    
+    /* Style from the image */
+    background: var(--bg-light);
+    padding: 15px 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    color: var(--dark-text);
+    transition: transform 0.2s;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+    color: var(--primary-yellow);
+}
+
+/* --- Main Content & Sections --- */
+main {
+    padding-top: 80px; /* Prevent content from hiding under header */
+}
+
+section {
+    /* Standard padding for all sections */
+    padding: 80px 10%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+/* Alternating background colors */
+section:nth-of-type(even) {
+    background-color: var(--bg-grey);
+}
+
+/* --- Home (Hero) Section --- */
+#home {
+    min-height: calc(100vh - 80px); /* Full height minus header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 0; /* Reset padding for this section */
+    
+    /* This is the subtle triangle background from the image */
+    background-color: #fcfcfc;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23f1f1f1' fill-opacity='0.4'%3E%3Cpath d='M0 38.59l2.83-2.83L38.59 0H0v38.59zM40 38.59l-2.83-2.83L1.41 0H40v38.59z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: var(--light-text);
+    margin-bottom: 30px;
+}
+
+/* Call to Action (CTA) Button */
+.cta-button {
+    background-color: var(--primary-yellow);
+    color: var(--dark-text);
+    padding: 15px 35px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #f0c000; /* Slightly darker yellow */
+}
+
+/* --- About Section --- */
+.about-summary {
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.skill-tag {
+    background: var(--border-light);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* --- Projects Section --- */
+.project-grid {
+    display: grid;
+    /* On large screens, 2 columns. On small, 1 column. */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.project-card h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.tag {
+    background: var(--bg-grey);
+    border: 1px solid var(--border-light);
+    color: var(--light-text);
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 15px;
+}
+
+/* --- Contact Section --- */
+#contact {
+    text-align: center;
+}
+
+.contact-info {
+    margin-top: 30px;
+}
+
+.contact-info p {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 25px;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--dark-text);
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+/* --- Responsive Design (for Mobile) --- */
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 60px; /* Adjust for smaller header */
+    }
+
+    header {
+        height: 60px;
+        padding: 0 5%;
+        flex-direction: column; /* Stack logo and nav */
+        height: auto;
+        padding: 15px 5%;
+    }
+    
+    header .logo a {
+        font-size: 1.2rem;
+    }
+
+    header nav {
+        margin-top: 10px;
+    }
+
+    header nav li {
+        margin-left: 15px;
+    }
+    
+    header nav a {
+        font-size: 0.8rem;
+    }
+
+    /* Hide the social bar on mobile */
+    .social-links {
+        display: none;
+    }
+
+    main {
+        padding-top: 100px; /* Extra space for stacked header */
+    }
+    
+    section {
+        padding: 60px 5%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    section h2 {
+        font-size: 2rem;
+    }
+}
