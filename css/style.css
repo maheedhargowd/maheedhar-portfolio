@@ -205,6 +205,51 @@ section:nth-of-type(even) {
     font-size: 0.9rem;
 }
 
+/* --- Education & Certification --- */
+.education-certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+    text-align: left;
+}
+.edu-certs-column h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--dark-text);
+    border-bottom: 2px solid var(--primary-yellow);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+.edu-item, .cert-item {
+    margin-bottom: 15px;
+    position: relative;
+}
+.edu-item h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+}
+.edu-item p {
+    margin: 4px 0 0;
+    font-size: 0.95rem;
+    color: var(--light-text);
+}
+.edu-item p em {
+    font-style: italic;
+    color: var(--dark-text);
+}
+.cert-item p {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0;
+    padding-top: 5px;
+}
+/* --- END Education --- */
+
+
 /* --- Projects Section --- */
 .project-grid {
     display: grid;
@@ -272,43 +317,92 @@ footer {
     font-size: 0.9rem;
 }
 
+/* --- Footer Socials (Mobile Only) --- */
+.footer-socials {
+    display: none; /* Hidden by default on desktop */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.footer-socials a {
+    font-size: 2rem; /* Make them large and easy to tap */
+    color: #a0a0a0; /* Match footer text color */
+    margin: 0 15px; /* Add spacing */
+    transition: color 0.3s;
+}
+
+.footer-socials a:hover {
+    color: var(--primary-yellow); /* Same hover effect */
+}
+
+
 /* --- Responsive Design (for Mobile) --- */
 @media (max-width: 768px) {
     html {
-        scroll-padding-top: 60px; /* Adjust for smaller header */
+        /* Adjust scroll-padding for *both* fixed bars */
+        scroll-padding-top: 60px; 
     }
 
+    /* --- UPDATED HEADER (LOGO BAR) --- */
     header {
         height: 60px;
         padding: 0 5%;
-        flex-direction: column; /* Stack logo and nav */
-        height: auto;
-        padding: 15px 5%;
+        /* REMOVED flex-direction: column and height: auto */
     }
     
     header .logo a {
         font-size: 1.2rem;
     }
 
+    /* --- NEW NAVIGATION (BOTTOM TAB BAR) --- */
     header nav {
-        margin-top: 10px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: var(--bg-light);
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 0; /* Override desktop style */
+        padding: 0;
+        z-index: 1001; /* Make sure it's on top */
+    }
+    
+    header nav ul {
+        width: 100%;
+        height: 100%;
+        justify-content: space-around; /* Spread links evenly */
+        align-items: center;
     }
 
     header nav li {
-        margin-left: 15px;
+        margin-left: 0; /* Remove desktop margin */
     }
     
     header nav a {
         font-size: 0.8rem;
+        color: var(--dark-text); /* Make text dark for light background */
+        padding: 10px 5px; /* Add tap area */
+    }
+    
+    /* Make the active link stand out */
+    header nav a:hover,
+    header nav a.active { /* You can add 'active' class with JS later */
+        color: var(--primary-yellow);
+        border-bottom: none; /* Remove desktop underline */
     }
 
-    /* Hide the social bar on mobile */
+    /* Hide the social bar on mobile (no change) */
     .social-links {
         display: none;
     }
 
+    /* --- UPDATED MAIN CONTENT --- */
     main {
-        padding-top: 100px; /* Extra space for stacked header */
+        /* Space for top logo bar */
+        padding-top: 80px; 
+        /* Space for bottom nav bar */
+        padding-bottom: 80px; 
     }
     
     section {
@@ -325,5 +419,22 @@ footer {
     
     section h2 {
         font-size: 2rem;
+    }
+    
+    .education-certs-grid {
+        margin-top: 40px;
+    }
+    
+    .edu-certs-column {
+        margin-bottom: 20px;
+    }
+    
+    .footer-socials {
+        display: block;
+    }
+    
+    /* Adjust footer padding so it's not hidden */
+    footer {
+        padding-bottom: 80px; /* Add padding to account for nav bar */
     }
 }
