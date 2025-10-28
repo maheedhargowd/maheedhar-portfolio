@@ -134,13 +134,12 @@ section:nth-of-type(even) {
     background-color: var(--bg-grey);
 }
 
-/* --- Home (Hero) Section --- */
+/* --- Home (Hero) Section - UPDATED --- */
 #home {
     min-height: calc(100vh - 80px); /* Full height minus header */
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding-top: 0; /* Reset padding for this section */
     
     /* This is the subtle triangle background from the image */
@@ -148,8 +147,18 @@ section:nth-of-type(even) {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23f1f1f1' fill-opacity='0.4'%3E%3Cpath d='M0 38.59l2.83-2.83L38.59 0H0v38.59zM40 38.59l-2.83-2.83L1.41 0H40v38.59z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px; /* Constrain the inner content */
+    margin: 0 auto;
+}
+
 .hero-content {
-    max-width: 700px;
+    max-width: 550px; /* Gives content priority */
+    flex: 1;
 }
 
 .hero-content h1 {
@@ -165,6 +174,24 @@ section:nth-of-type(even) {
     margin-bottom: 30px;
 }
 
+/* --- NEW IMAGE STYLES --- */
+.hero-image {
+    width: 350px; /* Max width for the image container */
+    height: 350px; /* Creates a square container for the circle */
+    margin-left: 50px;
+    flex-shrink: 0; /* Prevents it from shrinking too much */
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Makes the image circular */
+    border: 5px solid var(--primary-yellow); /* Yellow border accent */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+/* --- END IMAGE STYLES --- */
+
 /* Call to Action (CTA) Button */
 .cta-button {
     background-color: var(--primary-yellow);
@@ -176,6 +203,7 @@ section:nth-of-type(even) {
     border-radius: 5px;
     font-size: 1rem;
     transition: background-color 0.3s;
+    display: inline-block; /* ensures the button works properly */
 }
 
 .cta-button:hover {
@@ -253,7 +281,6 @@ section:nth-of-type(even) {
 /* --- Projects Section --- */
 .project-grid {
     display: grid;
-    /* On large screens, 2 columns. On small, 1 column. */
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
 }
@@ -338,24 +365,30 @@ footer {
 
 /* --- Responsive Design (for Mobile) --- */
 @media (max-width: 768px) {
+    /* Adjust scroll-padding for *both* fixed bars */
     html {
-        /* Adjust scroll-padding for *both* fixed bars */
         scroll-padding-top: 60px; 
     }
 
-    /* --- UPDATED HEADER (LOGO BAR) --- */
+    /* --- MOBILE HEADER (TOP LOGO BAR) --- */
     header {
         height: 60px;
         padding: 0 5%;
-        /* REMOVED flex-direction: column and height: auto */
+        /* Ensure logo is centered horizontally */
+        justify-content: center; 
     }
     
     header .logo a {
         font-size: 1.2rem;
     }
 
-    /* --- NEW NAVIGATION (BOTTOM TAB BAR) --- */
+    /* Hide the desktop nav entirely */
     header nav {
+        display: none; 
+    }
+    
+    /* --- NEW BOTTOM NAVIGATION BAR (FIXED) --- */
+    .mobile-nav-bar {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -363,34 +396,51 @@ footer {
         height: 60px;
         background-color: var(--bg-light);
         box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        margin-top: 0; /* Override desktop style */
+        z-index: 1001; 
+        display: flex; /* Make sure it shows up */
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    /* Re-purposing the desktop nav class to be the fixed bottom nav */
+    header nav {
+        display: flex; /* Show the nav on mobile */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: var(--bg-light);
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 0; 
         padding: 0;
-        z-index: 1001; /* Make sure it's on top */
+        z-index: 1001; 
     }
     
     header nav ul {
         width: 100%;
         height: 100%;
-        justify-content: space-around; /* Spread links evenly */
+        justify-content: space-around; 
         align-items: center;
     }
 
     header nav li {
-        margin-left: 0; /* Remove desktop margin */
+        margin-left: 0; 
+        text-align: center;
     }
     
     header nav a {
         font-size: 0.8rem;
-        color: var(--dark-text); /* Make text dark for light background */
-        padding: 10px 5px; /* Add tap area */
+        color: var(--dark-text);
+        padding: 10px 5px; 
     }
     
-    /* Make the active link stand out */
     header nav a:hover,
-    header nav a.active { /* You can add 'active' class with JS later */
+    header nav a.active {
         color: var(--primary-yellow);
-        border-bottom: none; /* Remove desktop underline */
+        border-bottom: none;
     }
+
 
     /* Hide the social bar on mobile (no change) */
     .social-links {
@@ -399,14 +449,35 @@ footer {
 
     /* --- UPDATED MAIN CONTENT --- */
     main {
-        /* Space for top logo bar */
-        padding-top: 80px; 
-        /* Space for bottom nav bar */
-        padding-bottom: 80px; 
+        /* Space for top logo bar (60px) + bottom nav bar (60px) */
+        padding-top: 60px; 
+        padding-bottom: 60px; 
     }
     
     section {
         padding: 60px 5%;
+    }
+    
+    /* --- HOME SECTION MOBILE FIX --- */
+    #home {
+        text-align: center; /* Center the stacked elements */
+    }
+    
+    .hero-container {
+        flex-direction: column; /* Stack image and text vertically */
+        justify-content: center;
+    }
+    
+    .hero-content {
+        order: 2; /* Put text after image */
+        margin-top: 30px;
+    }
+    
+    .hero-image {
+        order: 1; /* Put image first */
+        width: 250px; /* Make the image smaller for mobile */
+        height: 250px;
+        margin: 0 auto; /* Center the image */
     }
 
     .hero-content h1 {
@@ -433,8 +504,8 @@ footer {
         display: block;
     }
     
-    /* Adjust footer padding so it's not hidden */
+    /* Adjust footer padding so it's not hidden by the fixed bottom nav */
     footer {
-        padding-bottom: 80px; /* Add padding to account for nav bar */
+        padding-bottom: 80px; 
     }
 }
